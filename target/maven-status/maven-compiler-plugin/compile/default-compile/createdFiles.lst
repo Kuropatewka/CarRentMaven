@@ -1,0 +1,7 @@
+pl\camp\it\model\Vehicle.class
+pl\camp\it\model\Car.class
+pl\camp\it\gui\GUI.class
+pl\camp\it\Main.class
+pl\camp\it\Main2.class
+pl\camp\it\db\VehicleRepository.class
+pl\camp\it\model\Bus.class
