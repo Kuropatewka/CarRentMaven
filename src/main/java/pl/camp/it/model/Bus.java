@@ -10,6 +10,12 @@ public class Bus extends Vehicle {
         this.wheelsCount = wheelsCount;
     }
 
+    public Bus(int id, String brand, String model, String vin, boolean rent, int personsAmount, int wheelsCount) {
+        super(id, brand, model, vin, rent);
+        this.personsAmount = personsAmount;
+        this.wheelsCount = wheelsCount;
+    }
+
     public int getPersonsAmount() {
         return this.personsAmount;
     }

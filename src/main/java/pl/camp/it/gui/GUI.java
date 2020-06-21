@@ -1,5 +1,6 @@
 package pl.camp.it.gui;
 
+import pl.camp.it.db.Persistance;
 import pl.camp.it.db.VehicleRepository;
 import pl.camp.it.model.Vehicle;
 
@@ -7,7 +8,7 @@ import java.util.Scanner;
 
 public class GUI {
 
-    private static final VehicleRepository cr = new VehicleRepository();  // final- nie chcemy zeby ktos zmienial nam baze danych, ona jest ostateczna
+    // final- nie chcemy zeby ktos zmienial nam baze danych, ona jest ostateczna
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void showMainMenu() {
@@ -25,6 +26,7 @@ public class GUI {
                 rentCar();
                 break;
             case "3":
+                Persistance.saveData();
                 System.exit(0);
             default:
                 System.out.println("Nieprawidłowy wybór");
@@ -33,7 +35,7 @@ public class GUI {
         }
     }
    private static void showCar() {
-        for (Vehicle tempVehicle : cr.getVehicles()) {
+        for (Vehicle tempVehicle : VehicleRepository.getRepository().getVehicles()) {
             if (tempVehicle != null && !tempVehicle.isRent()) {   // temporaryCar.rent == false
                 System.out.println(tempVehicle);
                 }
@@ -43,7 +45,7 @@ public class GUI {
    private static void rentCar() {
         System.out.println("Wpisz id samoochodu: ");
         String carId = scanner.nextLine();
-        for(Vehicle tempVehicle : cr.getVehicles()) {
+        for(Vehicle tempVehicle : VehicleRepository.getRepository().getVehicles()) {
             try {
                 if (tempVehicle != null && tempVehicle.getId() == Integer.parseInt(carId)) {
                     if (!tempVehicle.isRent()) {
