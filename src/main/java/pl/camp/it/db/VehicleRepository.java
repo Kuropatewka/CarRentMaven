@@ -14,7 +14,7 @@ public class VehicleRepository {
 
     public VehicleRepository() {
 
-
+        Persistance.loadData(vehicles);
 
         /*Car c1 = new Car(1, "BMW", "3", "aeddawdaw");
         Car c2 = new Car(2,"Toyota", "Corolla", "uuhaiudshiu");
