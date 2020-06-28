@@ -70,9 +70,9 @@ public class SQLDb {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet wyniki = statement.executeQuery( "SELECT * FROM tvehicle");
+            ResultSet wyniki = statement.executeQuery("SELECT * FROM tvehicle");
 
-            while(wyniki.next()) {
+            while (wyniki.next()) {
                 int id = wyniki.getInt("id");
                 String brand = wyniki.getString("brand");
                 String model = wyniki.getString("model");
@@ -108,6 +108,14 @@ public class SQLDb {
                     .append(vehicle.getId());
 
             statement.executeUpdate(sql.toString());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static void closeConnection() {
+        try {
+            connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

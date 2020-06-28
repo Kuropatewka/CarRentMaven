@@ -27,7 +27,8 @@ public class GUI {
                 rentCar();
                 break;
             case "3":
-                Persistance.saveData();
+                //Persistance.saveData();
+                SQLDb.closeConnection();
                 System.exit(0);
             default:
                 System.out.println("Nieprawidłowy wybór");
