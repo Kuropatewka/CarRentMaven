@@ -1,6 +1,7 @@
 /home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/model/Car.java
 /home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/Main.java
 /home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/db/Persistance.java
+/home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/model/User.java
 /home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/model/Bus.java
 /home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/db/VehicleRepository.java
 /home/piotr/IdeaProjects/CarRentMaven/src/main/java/pl/camp/it/db/SQLDb.java

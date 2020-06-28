@@ -2,6 +2,7 @@ package pl.camp.it.db;
 
 import pl.camp.it.model.Bus;
 import pl.camp.it.model.Car;
+import pl.camp.it.model.User;
 import pl.camp.it.model.Vehicle;
 
 import java.sql.*;
@@ -116,6 +117,85 @@ public class SQLDb {
     public static void closeConnection() {
         try {
             connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public static User getUserByLogin(String login) {
+        try {
+            Statement statement = connection.createStatement();
+
+            String sql = "SELECT * FROM tuser WHERE login = '" + login + "'";
+
+            ResultSet result = statement.executeQuery(sql);
+
+            if (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setLogin(result.getString("login"));
+                user.setPassword(result.getString("password"));
+
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static User getUserByLogin2(String login) {
+        try {
+            String sql = "SELECT * FROM tuser WHERE login = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, login);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                User user = new User();
+                user.setId(result.getInt("id"));
+                user.setLogin(result.getString("login"));
+                user.setPassword(result.getString("password"));
+
+                return user;
+            } else {
+                return null;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void saveVehicle2(Vehicle vehicle) {
+        try {
+            String sql = "INSERT INTO tvehicle " +
+                    "(brand, model, vin, rent, personsAmount, wheelsCount) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, vehicle.getBrand());
+            statement.setString(2, vehicle.getModel());
+            statement.setString(3, vehicle.getVin());
+            statement.setBoolean(4, vehicle.isRent());
+
+            if (vehicle instanceof Bus) {
+                Bus bus = (Bus) vehicle;
+                statement.setInt(5, bus.getPersonsAmount());
+                statement.setInt(6, bus.getWheelsCount());
+            } else {
+                statement.setNull(5, Types.NULL);
+                statement.setNull(6, Types.NULL);
+            }
+
+            statement.executeUpdate();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

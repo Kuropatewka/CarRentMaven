@@ -1,8 +1,10 @@
 package pl.camp.it.gui;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import pl.camp.it.db.Persistance;
 import pl.camp.it.db.SQLDb;
 import pl.camp.it.db.VehicleRepository;
+import pl.camp.it.model.User;
 import pl.camp.it.model.Vehicle;
 
 import java.util.Scanner;
@@ -65,5 +67,27 @@ public class GUI {
             }
         }
         showMainMenu();
+    }
+
+    public static void showLoginScreen() {
+        System.out.println("Podaj login: ");
+        String login = scanner.nextLine();
+        System.out.println("Podaj hasło: ");
+        String password = scanner.nextLine();
+
+        User userFromDatBase = SQLDb.getUserByLogin2(login);
+
+        if (userFromDatBase == null) {
+            showLoginScreen();
+        } else {
+            String hashedPassword = DigestUtils.md5Hex(password);
+
+            if (hashedPassword.equals(userFromDatBase.getPassword())) {
+                showMainMenu();
+            } else {
+                showLoginScreen();
+            }
+
+        }
     }
 }
