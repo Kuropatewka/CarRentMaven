@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Persistance {
 
-    private static final String fileName = "C:\\Users\\piotr\\IdeaProjects\\carRentDb.txt";
+    private static final String fileName = "/home/piotr/IdeaProjects/carRentDb.txt";
 
     public static void saveData() {
 

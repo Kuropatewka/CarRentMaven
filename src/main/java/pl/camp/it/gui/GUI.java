@@ -1,6 +1,7 @@
 package pl.camp.it.gui;
 
 import pl.camp.it.db.Persistance;
+import pl.camp.it.db.SQLDb;
 import pl.camp.it.db.VehicleRepository;
 import pl.camp.it.model.Vehicle;
 
@@ -50,6 +51,7 @@ public class GUI {
                 if (tempVehicle != null && tempVehicle.getId() == Integer.parseInt(carId)) {
                     if (!tempVehicle.isRent()) {
                         tempVehicle.setRent(true);
+                        SQLDb.updateVehicleRent(tempVehicle);
                         System.out.println("Udało się");
                     } else {
                         System.out.println("Auto niedostępne");
